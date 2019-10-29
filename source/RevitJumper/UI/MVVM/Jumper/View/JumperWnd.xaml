@@ -1,0 +1,46 @@
+﻿<Window x:Class="RevitJumper.UI.MVVM.Jumper.View.JumperWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Revit Jumper" Width="600" Height="500" WindowStartupLocation="CenterScreen" ShowInTaskbar="False">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" Header="Guess what you want" Margin="10">
+            <ListBox Margin="5"
+                     SelectedItem="{Binding SelectedInfo,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                     ItemsSource="{Binding InfoList}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="{Binding RelatedKey}" Margin="5,0"
+                                       VerticalAlignment="Center" HorizontalAlignment="Left"
+                                       Foreground="#21a3a3"/>
+                            <TextBlock Grid.Row="1" Text="{Binding Description}" Margin="5,0"
+                                       VerticalAlignment="Center" HorizontalAlignment="Left"
+                                       Foreground="#aeaeae"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding SearchCmd, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ListBox>
+        </GroupBox>
+        <Button Grid.Row="1" Width="73" Height="25" Content="OK" Margin="0,0,0,10" Click="Button_Click"/>
+    </Grid>
+</Window>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+   <AddIn Type="Application">
+      <Assembly>RevitJumper.dll</Assembly>
+      <ClientId>E3E1FFB2-7FA9-4025-AC6D-2EFB1A430939</ClientId>
+      <FullClassName>RevitJumper.ExternalApplication</FullClassName>
+      <Name>Revit Jumper</Name>
+      <VendorId>bim.frankliang</VendorId>
+      <VendorDescription>bim.frankliang@foxmail.com</VendorDescription>	  
+   </AddIn>
+</RevitAddIns>
