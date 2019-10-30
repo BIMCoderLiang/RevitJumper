@@ -28,53 +28,45 @@ namespace RevitJumper
                 var target = doc.GetElement(targetId);
                 if (target != null)
                 {
-                    var type = target.GetType().Name;
-                    searchcontent = type;
-                }
-                else
-                {
-                    searchcontent = "View";
-                }
-                
-                var query = new Query();
-                try
-                {
-                    var models = new List<DisplayModel>();
-
-                    var result = query.GetSearchResult(searchcontent);
-                    JObject jo = (JObject)JsonConvert.DeserializeObject(result);
-                    var sections = jo["sections"].ToString();
-                    JObject products = (JObject)JsonConvert.DeserializeObject(sections);
-                    var productsinfo = products["Products"].ToString();
-                    JArray array = JArray.Parse(productsinfo);
-                    foreach (var info in array)
-                    {
-                        var relatedkey = info["value"].ToString();
-                        var data = info["data"].ToString();
-                        JObject datas = (JObject)JsonConvert.DeserializeObject(data);
-                        var description = datas["description"].ToString();
-                        var url = datas["url"].ToString();
-
-                        var model = new DisplayModel()
-                        {
-                            RelatedKey = relatedkey,
-                            Description = description,
-                            Url = url,
-                        };
-                        models.Add(model);
-                    }
-
-                    var wnd = new JumperWnd(models, version);
-                    wnd.ShowHostDialog();
-                }
-                catch (Exception ex)
-                {
-                    TaskDialog.Show("Exception", ex.Message);
-                }
+                    searchcontent = target.GetType().Name;
+                }                                              
             }
-            else
+            var query = new Query();
+            var models = new List<DisplayModel>();
+            try
+            {                
+                if (!string.IsNullOrEmpty(searchcontent))
+                {
+                    var array = query.GetSearchResult(searchcontent);
+                    if (array != null)
+                    {
+                        foreach (var info in array)
+                        {
+                            var relatedkey = info["value"].ToString();
+                            var data = info["data"].ToString();
+                            JObject datas = (JObject)JsonConvert.DeserializeObject(data);
+                            var description = datas["description"].ToString();
+                            var url = datas["url"].ToString();
+
+                            var model = new DisplayModel()
+                            {
+                                RelatedKey = relatedkey,
+                                Description = description,
+                                Url = url,
+                            };
+                            models.Add(model);
+                        }
+                    }                    
+                }               
+            }
+            catch
             {
-                TaskDialog.Show("Warning", "No Selection");
+
+            }
+            finally
+            {
+                var wnd = new JumperWnd(models, searchcontent, version);
+                wnd.ShowHostDialog();
             }
             return Result.Succeeded;
         }       

@@ -10,36 +10,45 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <GroupBox Grid.Row="0" Header="Guess what you want" Margin="10">
-            <ListBox Margin="5"
-                     SelectedItem="{Binding SelectedInfo,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                     ItemsSource="{Binding InfoList}">
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical" />
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Margin="0,5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" Text="{Binding RelatedKey}" Margin="5,0"
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBox Grid.Row="0" Grid.Column="0" Height="25" VerticalAlignment="Center" Margin="5,5,5,0"
+                         VerticalContentAlignment="Center"
+                         Text="{Binding QueryInput,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                <ListBox Margin="5" Grid.Row="1"
+                         SelectedItem="{Binding SelectedInfo,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                         ItemsSource="{Binding InfoList}">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="{Binding RelatedKey}" Margin="5,0"
                                        VerticalAlignment="Center" HorizontalAlignment="Left"
                                        Foreground="#21a3a3"/>
-                            <TextBlock Grid.Row="1" Text="{Binding Description}" Margin="5,0"
+                                <TextBlock Grid.Row="1" Text="{Binding Description}" Margin="5,0"
                                        VerticalAlignment="Center" HorizontalAlignment="Left"
                                        Foreground="#aeaeae"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseDoubleClick">
-                        <i:InvokeCommandAction Command="{Binding SearchCmd, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </ListBox>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding SearchCmd}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListBox>
+            </Grid>
         </GroupBox>
         <Button Grid.Row="1" Width="73" Height="25" Content="OK" Margin="0,0,0,10" Click="Button_Click"/>
     </Grid>

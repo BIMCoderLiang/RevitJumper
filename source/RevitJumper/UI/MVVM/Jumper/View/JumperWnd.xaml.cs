@@ -11,10 +11,10 @@ namespace RevitJumper.UI.MVVM.Jumper.View
     /// </summary>
     public partial class JumperWnd : Window
     {
-        public JumperWnd(List<DisplayModel> models, string version)
+        public JumperWnd(List<DisplayModel> models, string content, string version)
         {
             InitializeComponent();
-            DataContext = new JumperVM(models, version);
+            DataContext = new JumperVM(models, content, version);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
