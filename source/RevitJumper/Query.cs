@@ -20,8 +20,7 @@ namespace RevitJumper
                 var sections = jo["sections"].ToString();
                 JObject products = (JObject)JsonConvert.DeserializeObject(sections);
                 var productsinfo = products["Products"].ToString();
-                array = JArray.Parse(productsinfo);
-                
+                array = JArray.Parse(productsinfo);               
             }
             catch
             {
