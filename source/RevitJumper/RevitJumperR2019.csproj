@@ -73,12 +73,17 @@
     </Compile>
     <Compile Include="WindowUtils.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Image\Jumper.png" />
+  </ItemGroup>
   <ItemGroup>
     <Page Include="UI\MVVM\Jumper\View\JumperWnd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Resources\Image\Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

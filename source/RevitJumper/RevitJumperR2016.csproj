@@ -73,7 +73,10 @@
     </Compile>
     <Compile Include="WindowUtils.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Image\Jumper.png" />
+    <Resource Include="UI\Resources\Image\Icon.ico" />
+  </ItemGroup>
   <ItemGroup>
     <Page Include="UI\MVVM\Jumper\View\JumperWnd.xaml">
       <SubType>Designer</SubType>
