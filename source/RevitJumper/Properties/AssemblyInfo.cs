@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("RevitJumperR2018")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("RevitJumper")]
+[assembly: AssemblyDescription("A Revit Tool which swift jump to www.revitapidocs.com")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("HP Inc.")]
-[assembly: AssemblyProduct("RevitJumperR2018")]
-[assembly: AssemblyCopyright("Copyright © HP Inc. 2019")]
+[assembly: AssemblyCompany("bim.frankliang@foxmail.com")]
+[assembly: AssemblyProduct("RevitJumper")]
+[assembly: AssemblyCopyright("Copyright © bim.frankliang 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
