@@ -68,6 +68,7 @@
     <Compile Include="JumperCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query.cs" />
+    <Compile Include="UI\Converter\BooleanVisibilityConverter.cs" />
     <Compile Include="UI\MVVM\Jumper\Model\DisplayModel.cs" />
     <Compile Include="UI\MVVM\Jumper\ViewModel\JumperVM.cs" />
     <Compile Include="UI\MVVM\Jumper\View\JumperWnd.xaml.cs">

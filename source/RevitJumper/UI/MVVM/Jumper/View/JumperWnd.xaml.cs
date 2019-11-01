@@ -1,5 +1,5 @@
 ﻿
-using RevitJumper.UI.MVVM.Jumper.Model;
+using Autodesk.Revit.DB;
 using RevitJumper.UI.MVVM.Jumper.ViewModel;
 using System.Collections.Generic;
 using System.Windows;
@@ -11,10 +11,10 @@ namespace RevitJumper.UI.MVVM.Jumper.View
     /// </summary>
     public partial class JumperWnd : Window
     {
-        public JumperWnd(List<DisplayModel> models, string content, string version)
+        public JumperWnd(Document doc, List<ElementId> elemIds, string version)
         {
             InitializeComponent();
-            DataContext = new JumperVM(models, content, version);
+            DataContext = new JumperVM(doc, elemIds, version);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

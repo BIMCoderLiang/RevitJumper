@@ -1,16 +1,39 @@
 ﻿<Window x:Class="RevitJumper.UI.MVVM.Jumper.View.JumperWnd"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converter="clr-namespace:RevitJumper.UI.Converter"
         Icon="/RevitJumper;component/UI/Resources/Image/Icon.ico"
         Title="Revit Jumper" Width="600" Height="500" WindowStartupLocation="CenterScreen" ShowInTaskbar="False">
+
+    <Window.Resources>
+        <converter:BooleanVisibilityConverter x:Key="visibleconverter"/>
+    </Window.Resources>
     
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <GroupBox Grid.Row="0" Header="Guess what you want" Margin="10">
+        <ListBox Grid.Row="0" Visibility="{Binding IsVisible,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource visibleconverter}}"
+                 Margin="10,10,10,0"
+                 SelectedItem="{Binding SelectedType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                 ItemsSource="{Binding TypeNames,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=.}" 
+                               VerticalAlignment="Top" HorizontalAlignment="Left"
+                               Margin="5"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <GroupBox Grid.Row="1" Header="Guess what you want" Margin="10">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -21,7 +44,7 @@
                          Text="{Binding QueryInput,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <ListBox Margin="5" Grid.Row="1"
                          SelectedItem="{Binding SelectedInfo,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                         ItemsSource="{Binding InfoList}">
+                         ItemsSource="{Binding InfoList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Vertical" />
@@ -51,6 +74,6 @@
                 </ListBox>
             </Grid>
         </GroupBox>
-        <Button Grid.Row="1" Width="73" Height="25" Content="OK" Margin="0,0,0,10" Click="Button_Click"/>
+        <Button Grid.Row="2" Width="73" Height="25" Content="OK" Margin="0,0,0,10" Click="Button_Click"/>
     </Grid>
 </Window>
