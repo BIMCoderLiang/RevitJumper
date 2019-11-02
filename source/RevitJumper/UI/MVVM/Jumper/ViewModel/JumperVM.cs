@@ -26,6 +26,7 @@ namespace RevitJumper.UI.MVVM.Jumper.ViewModel
         public JumperVM(Document doc, List<ElementId> elemIds, string version)
         {
             Engines = new ObservableCollection<string>() { "Revitapidocs", "Revit API Forum" };
+            SelectedEngine = Engines.FirstOrDefault();
             InfoList = new ObservableCollection<DisplayModel>();          
             this.version = version;
             if (elemIds != null && elemIds.Any())
