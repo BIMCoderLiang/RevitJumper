@@ -48,6 +48,7 @@
                              VerticalContentAlignment="Center"
                              Text="{Binding QueryInput,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     <ComboBox Grid.Column="1" Width="120" Height="25" VerticalAlignment="Center" Margin="5,5,5,0"
+                              VerticalContentAlignment="Center"
                               SelectedItem="{Binding SelectedEngine,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                               ItemsSource="{Binding Engines}"/>
                 </Grid>

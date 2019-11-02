@@ -10,13 +10,10 @@
 // restricted rights notice below appear in all supporting 
 // documentation.
 //
-// Use, duplication, or disclosure by the U.S. Government is subject to 
-// restrictions set forth in FAR 52.227-19 (Commercial Computer
-// Software - Restricted Rights) and DFAR 252.227-7013(c)(1)(ii)
-// (Rights in Technical Data and Computer Software), as applicable.
+// Use Only For Study, Not For Commercial Use
 //
 // ID:bim.frankliang
-// True Name: Yuqing Liang (梁裕卿)
+// Name: Yuqing Liang (梁裕卿)
 // E-mail: bim.frankliang@foxmail.com
 // TONGJI ARCHITECTURAL DESIGN (GROUP) CO.,Ltd BIM Coder
 // AUTODESK EXPERT ELITE
@@ -48,8 +45,8 @@ namespace RevitJumper
             }
 
             var panel = application.CreateRibbonPanel(ProjectName);
-            var button = CreatePushButton(panel, "Jumper", "Jumper");
-            AddButtonTip(button as RibbonItem, "Search in Revit", "Search in Revit");
+            var button = CreatePushButton(panel, "Jumper", "Revit Jumper");
+            AddButtonTip(button as RibbonItem, string.Empty, string.Empty);
             return Result.Succeeded;
         }
 

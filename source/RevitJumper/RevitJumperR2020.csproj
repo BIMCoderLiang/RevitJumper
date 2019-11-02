@@ -63,6 +63,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Engines.cs" />
     <Compile Include="ExternalApplication.cs" />
     <Compile Include="HttpControl.cs" />
     <Compile Include="JumperCommand.cs" />
