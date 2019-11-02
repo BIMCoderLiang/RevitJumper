@@ -1,6 +1,4 @@
 ﻿using Autodesk.Revit.DB;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using RevitJumper.UI.MVVM.Jumper.Model;
 using System;
 using System.Collections.Generic;
@@ -17,6 +15,8 @@ namespace RevitJumper.UI.MVVM.Jumper.ViewModel
         public ICommand SearchCmd { get; set; }
         public ObservableCollection<DisplayModel> InfoList { get; set; }
         public ObservableCollection<string> TypeNames { get; set; }
+        public ObservableCollection<string> Engines { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(string name)
         {
@@ -25,8 +25,8 @@ namespace RevitJumper.UI.MVVM.Jumper.ViewModel
 
         public JumperVM(Document doc, List<ElementId> elemIds, string version)
         {
-            InfoList = new ObservableCollection<DisplayModel>();
-           
+            Engines = new ObservableCollection<string>() { "Revitapidocs", "Revit API Forum" };
+            InfoList = new ObservableCollection<DisplayModel>();          
             this.version = version;
             if (elemIds != null && elemIds.Any())
             {
@@ -65,13 +65,29 @@ namespace RevitJumper.UI.MVVM.Jumper.ViewModel
                     NotifyPropertyChanged("TypeNames");
                     SelectedType = TypeNames.FirstOrDefault();
                 }
-            }
+            }           
+            SelectedEngine = Engines.FirstOrDefault();
             SearchCmd = new RelayCommand(ExecuteSearch, CanRun);
         }
 
         private bool CanRun(object para)
         {
             return true;
+        }
+
+        private string _selectedEngine;
+        public string SelectedEngine
+        {
+            get
+            {
+                return _selectedEngine;
+            }
+            set
+            {
+                _selectedEngine = value;
+                NotifyPropertyChanged("SelectedEngine");
+                GetResults();
+            }
         }
 
         private string _selectedType;
@@ -100,30 +116,7 @@ namespace RevitJumper.UI.MVVM.Jumper.ViewModel
             {
                 _queryInput = value;
                 NotifyPropertyChanged("QueryInput");
-                InfoList.Clear();
-                var query = new Query();
-                var array = query.GetSearchResult(_queryInput);
-                if (array != null)
-                {
-                    foreach (var info in array)
-                    {
-                        var relatedkey = info["value"].ToString();
-                        var data = info["data"].ToString();
-                        JObject datas = (JObject)JsonConvert.DeserializeObject(data);
-                        var description = datas["description"].ToString();
-                        var url = datas["url"].ToString();
-
-                        var model = new DisplayModel()
-                        {
-                            RelatedKey = relatedkey,
-                            Description = description,
-                            Url = url,
-                        };
-                        InfoList.Add(model);
-                    }
-                    NotifyPropertyChanged("InfoList");
-                    SelectedInfo = InfoList.FirstOrDefault();
-                }                              
+                GetResults();
             }
         }
 
@@ -155,13 +148,36 @@ namespace RevitJumper.UI.MVVM.Jumper.ViewModel
             }
         }
 
+        private void GetResults()
+        {
+            if (!string.IsNullOrEmpty(_queryInput) && !string.IsNullOrWhiteSpace(_queryInput))
+            {
+                InfoList.Clear();
+                var query = new Query();
+                var results = query.GetSearchResult(_queryInput, _selectedEngine);
+                if (results != null && results.Any())
+                {
+                    foreach (var r in results)
+                    {
+                        var model = new DisplayModel()
+                        {
+                            RelatedKey = r.RelatedKey,
+                            Description = r.Description,
+                            Url = r.Url,
+                        };
+                        InfoList.Add(model);
+                    }
+                    NotifyPropertyChanged("InfoList");
+                    SelectedInfo = InfoList.FirstOrDefault();
+                }
+            }
+        }
 
         private void ExecuteSearch(object param)
         {
             var url = SelectedInfo == null ? string.Empty : SelectedInfo.Url;
-            var revitdocs = "https://www.revitapidocs.com";
-            var finalurl = $"{revitdocs}/{version}/{url}";
-            System.Diagnostics.Process.Start(finalurl);
+            var query = new Query();
+            query.GoSearch(SelectedEngine, version, url);          
         }
     }
 

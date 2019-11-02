@@ -39,9 +39,19 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBox Grid.Row="0" Grid.Column="0" Height="25" VerticalAlignment="Center" Margin="5,5,5,0"
-                         VerticalContentAlignment="Center"
-                         Text="{Binding QueryInput,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" Height="25" VerticalAlignment="Center" Margin="5,5,5,0"
+                             VerticalContentAlignment="Center"
+                             Text="{Binding QueryInput,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <ComboBox Grid.Column="1" Width="120" Height="25" VerticalAlignment="Center" Margin="5,5,5,0"
+                              SelectedItem="{Binding SelectedEngine,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                              ItemsSource="{Binding Engines}"/>
+                </Grid>
+              
                 <ListBox Margin="5" Grid.Row="1"
                          SelectedItem="{Binding SelectedInfo,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                          ItemsSource="{Binding InfoList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
