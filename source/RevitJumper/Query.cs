@@ -54,10 +54,10 @@ namespace RevitJumper
             }
             else if (engine.Equals(DescriptionAttributeUtility.GetDescriptionFromEnumValue(Engines.RevitAPIForum)))
             {
-                geturl = $"{apiforumurl}?t:ac=board-id/160&t:cp=search/contributions/page&q={query}&limit=1000&timestamp=1572664154924&searchContext=160%7Cforum-board";
+                geturl = $"{apiforumurl}?t:ac=board-id/160&t:cp=search/contributions/page&q={query}&searchContext=160%7Cforum-board";
                 try
                 {
-                    System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                     var httpresult = HttpControl.HttpClient.GetAsync(new Uri(geturl)).Result;           
                     var result = httpresult.Content.ReadAsStringAsync().Result;
                     var array = JArray.Parse(result);
