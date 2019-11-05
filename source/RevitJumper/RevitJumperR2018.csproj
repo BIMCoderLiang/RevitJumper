@@ -62,7 +62,6 @@
   <ItemGroup>
     <Compile Include="Engines.cs" />
     <Compile Include="ExternalApplication.cs" />
-    <Compile Include="HttpControl.cs" />
     <Compile Include="JumperCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query.cs" />

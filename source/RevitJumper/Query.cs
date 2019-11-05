@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 
 namespace RevitJumper
 {
@@ -20,7 +21,7 @@ namespace RevitJumper
                 geturl = $"{apidocumenturl}/{query}?autocomplete_key=key_yyAC1mb0cTgZTwSo&c=ciojs-1.57.1&num_results=30&i=62b7b575-880d-48a0-98e7-90ef437be6c1&s=3&query={query}&_dt=1572328914509";
                 try
                 {
-                    var httpresult = HttpControl.HttpClient.GetAsync(new Uri(geturl)).Result;
+                    var httpresult = new HttpClient().GetAsync(new Uri(geturl)).Result;
                     var result = httpresult.Content.ReadAsStringAsync().Result;
                     JObject jo = (JObject)JsonConvert.DeserializeObject(result);
                     var sections = jo["sections"].ToString();
@@ -58,7 +59,7 @@ namespace RevitJumper
                 try
                 {
                     ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                    var httpresult = HttpControl.HttpClient.GetAsync(new Uri(geturl)).Result;           
+                    var httpresult = new HttpClient().GetAsync(new Uri(geturl)).Result;           
                     var result = httpresult.Content.ReadAsStringAsync().Result;
                     var array = JArray.Parse(result);
                     if (array != null)
