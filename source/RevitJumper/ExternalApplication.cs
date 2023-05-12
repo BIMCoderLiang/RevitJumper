@@ -15,8 +15,6 @@
 // ID:bim.frankliang
 // Name: Yuqing Liang (梁裕卿)
 // E-mail: bim.frankliang@foxmail.com
-// TONGJI ARCHITECTURAL DESIGN (GROUP) CO.,Ltd BIM Coder
-// AUTODESK EXPERT ELITE
 // 
 #endregion
 
