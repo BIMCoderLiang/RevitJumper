@@ -19,8 +19,8 @@
 
 #### FYI
  
-Author : bim.frankliang (梁裕卿)
-E-mail : bim.frankliang@foxmail.com
-Icon Designed by ZeNong Gong (龚泽农)
+Author : bim.frankliang (梁裕卿)  
+E-mail : bim.frankliang@foxmail.com  
+Icon Designed by ZeNong Gong (龚泽农)  
 <The source codes only use for study, not for commercial use>
 
